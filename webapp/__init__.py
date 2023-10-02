@@ -22,8 +22,18 @@ def create_app():
 
 
     @app.route('/')
-    def return_hello():
-        return 'hello'
+    def homepage():
+        return render_template('index.html', page_title='Главная')
+    
+
+    @app.route('/alphabet')
+    def alphabet_page():
+        return render_template('alphabet.html', page_title='Алфавит')
+
+
+    @app.route('/syllables')
+    def syllables_page():
+        return render_template('syllables.html', page_title='Слоги')
 
 
     @app.route('/login', methods=['GET', 'POST'])
@@ -65,9 +75,9 @@ def create_app():
     def logout():
         logout_user()
         flash('Вы успешно вышли из своего аккаунта')
-        return redirect(url_for('login')) # 'login' заменить, когда будет готов шаблон главной страницы
+        return redirect(url_for('homepage')) 
     
-    # выяснить, почему не проходит авторизация 
+
     @app.route('/process-login', methods=['POST'])
     def process_login():
         form = LoginForm()
@@ -76,7 +86,7 @@ def create_app():
             if user and user.check_password(password=form.password2.data):
                 login_user(user)
                 flash('Вы успешно авторизировались')
-                return redirect(url_for('login')) # 'login' заменить, когда будет готов шаблон главной страницы
+                return redirect(url_for('homepage'))
         flash('Неправильный логин(никнейм) или пароль')
         return redirect(url_for('login'))
 
