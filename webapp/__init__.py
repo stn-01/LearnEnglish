@@ -1,20 +1,28 @@
 import os
 
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from flask import Flask, render_template, flash, url_for, redirect
 from flask_login import LoginManager, login_user, logout_user
 
+from webapp.admin_panel import DashboardView
 from webapp.models import db, User
 from webapp.forms import LoginForm, RegisterForm
 
 
 def create_app():
-    app = Flask(__name__, template_folder=os.path.join(os.getcwd(), 'templates'))
+    app = Flask(__name__, template_folder=os.path.join(os.getcwd(), 'webapp/templates'))
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'login'
+
+    admin = Admin(app, name='Админка LearnEnglish', template_mode='bootstrap3',
+                  index_view = DashboardView(), endpoint='admin')
+    admin.add_view(ModelView(User, db.session, name='Пользователи'))
+    
 
     @login_manager.user_loader
     def load_user(user_id):
