@@ -1,8 +1,62 @@
 {% extends 'blank.html' %}
 {% block body %}
-<div class="row center">
-    <img src="static/images/works.png"><p>{{ page_title }}</p>
+<div class="container">
+    <div class="row center" style="background-color:DodgerBlue; color:White; font-size:150%;">Выберите букву для отображения слогов.</div>
+    <div class="row center">
+        <a href="/syllables/a" style="font-size:150%">A</a>
+        <a href="/syllables/b" style="font-size:150%">B</a>
+        <a href="/syllables/c" style="font-size:150%">C</a>
+        <a href="/syllables/d" style="font-size:150%">D</a>
+        <a href="/syllables/e" style="font-size:150%">E</a>
+        <a href="/syllables/f" style="font-size:150%">F</a>
+        <a href="/syllables/g" style="font-size:150%">G</a>
+        <a href="/syllables/h" style="font-size:150%">H</a>
+        <a href="/syllables/i" style="font-size:150%">I</a>
+        <a href="/syllables/j" style="font-size:150%">J</a>
+        <a href="/syllables/k" style="font-size:150%">K</a>
+        <a href="/syllables/l" style="font-size:150%">L</a>
+        <a href="/syllables/m" style="font-size:150%">M</a>
+        <a href="/syllables/n" style="font-size:150%">N</a>
+        <a href="/syllables/o" style="font-size:150%">O</a>
+        <a href="/syllables/p" style="font-size:150%">P</a>
+        <a href="/syllables/q" style="font-size:150%">Q</a>
+        <a href="/syllables/r" style="font-size:150%">R</a>
+        <a href="/syllables/s" style="font-size:150%">S</a>
+        <a href="/syllables/t" style="font-size:150%">T</a>
+        <a href="/syllables/u" style="font-size:150%">U</a>
+        <a href="/syllables/v" style="font-size:150%">V</a>
+        <a href="/syllables/w" style="font-size:150%">W</a>
+        <a href="/syllables/x" style="font-size:150%">X</a>
+        <a href="/syllables/y" style="font-size:150%">Y</a>
+        <a href="/syllables/z" style="font-size:150%">Z</a>
+    </div>
 </div>
-<br>
-<br>
+{% if letter %}
+<div class="row center" style="color:Black; font-size:150%;">Чтение слогов с буквой {{ letter.upper() }}.</div>
+<!-- --------------------------->
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Слог</th>
+                <th>Транскрипция</th>
+                <th>Озвучка</th>
+                <th>Правило</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in syllables %}
+            <tr>
+                <td style="font-size:150%; color:DodgerBlue;">{{ syllables[key]['syllable'] }}</td>
+                <td style="text-align:center; font-size:150%;">{{ syllables[key]['transcription'] }}</td>
+                <td><i class="material-icons" style="color:MediumSeaGreen; font-size:45px;">play_circle_filled</i></td>
+                <td style="font-size:100%;">{{ syllables[key]['description'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- --------------------------->
+{% endif %}
+<br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
