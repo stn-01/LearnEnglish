@@ -1,8 +1,204 @@
 {% extends 'blank.html' %}
 {% block body %}
-<div class="row center">
-    <img src="static/images/works.png"><p>{{ page_title }}</p>
+<div class="container">
+   <table>
+        <thead>
+          <tr>
+              <th>Название</th>
+              <th>Буква</th>
+              <th>Звук</th>
+              <th>Озвучка</th>
+          </tr>
+        </thead>
+
+       <tbody>
+<tr>
+<td style="width:15%">[{{ a_letter['name'] }}]</td>                             <!-- можно ['name'], можно .name -->
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ a_letter.char_upper }}{{ a_letter.char_lower }}</td>
+<td>{{ a_letter['sound'] }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ b_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ b_letter.char_upper }}{{ b_letter.char_lower }}</td>
+<td>{{ b_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ c_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ c_letter.char_upper }}{{ c_letter.char_lower }}</td>
+<td>{{ c_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ d_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ d_letter.char_upper }}{{ d_letter.char_lower }}</td>
+<td>{{ d_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ e_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ e_letter.char_upper }}{{ e_letter.char_lower }}</td>
+<td>{{ e_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ f_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ f_letter.char_upper }}{{ f_letter.char_lower }}</td>
+<td>{{ f_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ g_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ g_letter.char_upper }}{{ g_letter.char_lower }}</td>
+<td>{{ g_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ h_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ h_letter.char_upper }}{{ h_letter.char_lower }}</td>
+<td>{{ h_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ i_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ i_letter.char_upper }}{{ i_letter.char_lower }}</td>
+<td>{{ i_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ j_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ j_letter.char_upper }}{{ j_letter.char_lower }}</td>
+<td>{{ j_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ k_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ k_letter.char_upper }}{{ k_letter.char_lower }}</td>
+<td>{{ k_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ l_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ l_letter.char_upper }}{{ l_letter.char_lower }}</td>
+<td>{{ l_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ m_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ m_letter.char_upper }}{{ m_letter.char_lower }}</td>
+<td>{{ m_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ n_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ n_letter.char_upper }}{{ n_letter.char_lower }}</td>
+<td>{{ n_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ o_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ o_letter.char_upper }}{{ o_letter.char_lower }}</td>
+<td>{{ o_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ p_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ p_letter.char_upper }}{{ p_letter.char_lower }}</td>
+<td>{{ p_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ q_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ q_letter.char_upper }}{{ q_letter.char_lower }}</td>
+<td>{{ q_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ r_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ r_letter.char_upper }}{{ r_letter.char_lower }}</td>
+<td>{{ r_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ s_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ s_letter.char_upper }}{{ s_letter.char_lower }}</td>
+<td>{{ s_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ t_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ t_letter.char_upper }}{{ t_letter.char_lower }}</td>
+<td>{{ t_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ u_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ u_letter.char_upper }}{{ u_letter.char_lower }}</td>
+<td>{{ u_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ v_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ v_letter.char_upper }}{{ v_letter.char_lower }}</td>
+<td>{{ v_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ w_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ w_letter.char_upper }}{{ w_letter.char_lower }}</td>
+<td>{{ w_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ x_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ x_letter.char_upper }}{{ x_letter.char_lower }}</td>
+<td>{{ x_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ y_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ y_letter.char_upper }}{{ y_letter.char_lower }}</td>
+<td>{{ y_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+
+<tr>
+<td style="width:15%">[{{ z_letter.name }}]</td>
+<td style="color:DodgerBlue; font-size:200%;font-family:Arial;">{{ z_letter.char_upper }}{{ z_letter.char_lower }}</td>
+<td>{{ z_letter.sound }}</td>
+<td>тут синтез</td>
+</tr>
+        </tbody>
+      </table>
 </div>
 <br>
 <br>
+<br>
+<br>
+
 {% endblock %}
