@@ -12,14 +12,16 @@
 </head>
 <body>
   {% with messages = get_flashed_messages() %}
-            {% if messages %}
-          <div class="alert alert-info" role="alert">
-          {% for message in messages %}
-            {{ message }}<br>
-          {% endfor %}
-          </div>
-          {% endif %}
-            {% endwith %}
+  {% if messages %}
+    <div class="card blue lighten-4">
+      <div class="card-content">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endwith %}
   <nav class="green lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">

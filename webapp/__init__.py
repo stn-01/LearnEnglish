@@ -5,8 +5,9 @@ from flask_admin.contrib.sqla import ModelView
 from flask import Flask, render_template, flash, url_for, redirect
 from flask_login import (LoginManager, current_user,
                          login_user, logout_user)
+from flask_materialize import Material
 
-from webapp.admin_panel import DashboardView
+from webapp.admin_panel import DashboardView, UserView
 from webapp.models import db, User
 from webapp.forms import LoginForm, RegisterForm
 
@@ -21,9 +22,10 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
-    admin = Admin(app, name='Админка LearnEnglish', template_mode='bootstrap3',
-                  index_view=DashboardView(), endpoint='admin')
-    admin.add_view(ModelView(User, db.session, name='Пользователи'))
+    admin = Admin(app, index_view=DashboardView(),
+                  endpoint='admin')
+    material = Material(app)
+    admin.add_view(UserView(User, db.session, name='Пользователи'))
 
     @login_manager.user_loader
     def load_user(user_id):
