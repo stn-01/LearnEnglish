@@ -3,7 +3,8 @@ import os
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask import Flask, render_template, flash, url_for, redirect
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import (LoginManager, current_user,
+                         login_user, logout_user)
 
 from webapp.admin_panel import DashboardView
 from webapp.models import db, User
@@ -43,6 +44,9 @@ def create_app():
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         title = 'Регистрация и авторизация'
+        if current_user.is_authenticated:
+            flash('Вы уже авторизированы')
+            return redirect(url_for('homepage'))
         login_form = LoginForm()
         register_form = RegisterForm()
         if login_form.validate_on_submit():
@@ -54,6 +58,9 @@ def create_app():
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         title = 'Регистрация и авторизация'
+        if current_user.is_authenticated:
+            flash('Вы уже зарегистрированы!')
+            return redirect(url_for('homepage'))
         login_form = LoginForm()
         register_form = RegisterForm()
         if register_form.validate_on_submit():
@@ -95,4 +102,5 @@ def create_app():
                 return redirect(url_for('homepage'))
         flash('Неправильный логин(никнейм) или пароль')
         return redirect(url_for('login'))
+
     return app
