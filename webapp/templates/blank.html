@@ -11,6 +11,15 @@
   <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-color:LightGoldenRodYellow">
+  {% with messages = get_flashed_messages() %}
+            {% if messages %}
+          <div class="alert alert-info" role="alert">
+          {% for message in messages %}
+            {{ message }}<br>
+          {% endfor %}
+          </div>
+          {% endif %}
+            {% endwith %}
   <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
