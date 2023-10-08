@@ -7,10 +7,10 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body>
+<body style="background-color:LightGoldenRodYellow">
   {% with messages = get_flashed_messages() %}
             {% if messages %}
           <div class="alert alert-info" role="alert">
@@ -20,7 +20,7 @@
           </div>
           {% endif %}
             {% endwith %}
-  <nav class="green lighten-1" role="navigation">
+  <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Главная</a></li>
@@ -31,7 +31,6 @@
         <li><a href="/logout">Выйти</a></li>
         <li><a href="/admin">Админка</a></li>
       </ul>
-
       <ul id="nav-mobile" class="sidenav green darken-1">
         <br>
         <li><a href="/"><h6 class="white-text">Главная</h6></a></li>
@@ -84,8 +83,8 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="static/js/materialize.js"></script>
-  <script src="static/js/init.js"></script>
+  <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/init.js') }}"></script>
 
   </body>
 </html>
