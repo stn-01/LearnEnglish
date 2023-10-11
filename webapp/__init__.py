@@ -1,9 +1,13 @@
 import os
 
+from alphabet import ALPHABET
+from syllables import SYLLABLES
+
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask import Flask, render_template, flash, url_for, redirect
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import (LoginManager, current_user,
+                         login_user, logout_user)
 
 from webapp.admin_panel import DashboardView
 from webapp.models import db, User
@@ -34,15 +38,29 @@ def create_app():
 
     @app.route('/alphabet')
     def alphabet_page():
-        return render_template('alphabet.html', page_title='Алфавит')
+        alphabet_for_render_template = {f"{letter}_letter": ALPHABET[letter] for letter in 'abcdefghijklmnopqrstuvwxyz'}
+        return render_template('alphabet.html', page_title='Алфавит', **alphabet_for_render_template)
 
     @app.route('/syllables')
     def syllables_page():
-        return render_template('syllables.html', page_title='Слоги')
+        syllables = ''
+        return render_template('syllables.html', page_title='Слоги', syllables=syllables)
+
+    @app.route('/syllables/<letter>')
+    def letter_syllables_page(letter):
+        syllables = SYLLABLES.get(letter)
+        if not syllables:
+            return render_template('index.html', page_title=f'Слоги c {letter.upper()}')
+        return render_template('syllables.html', page_title=f'Слоги c {letter.upper()}', syllables=syllables,
+                               letter=letter)
+
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         title = 'Регистрация и авторизация'
+        if current_user.is_authenticated:
+            flash('Вы уже авторизированы')
+            return redirect(url_for('homepage'))
         login_form = LoginForm()
         register_form = RegisterForm()
         if login_form.validate_on_submit():
@@ -54,6 +72,9 @@ def create_app():
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         title = 'Регистрация и авторизация'
+        if current_user.is_authenticated:
+            flash('Вы уже зарегистрированы!')
+            return redirect(url_for('homepage'))
         login_form = LoginForm()
         register_form = RegisterForm()
         if register_form.validate_on_submit():
@@ -95,4 +116,5 @@ def create_app():
                 return redirect(url_for('homepage'))
         flash('Неправильный логин(никнейм) или пароль')
         return redirect(url_for('login'))
+
     return app
