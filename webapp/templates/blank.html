@@ -10,7 +10,7 @@
   <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body style="background-color:LightGoldenRodYellow; width:100vw;">
+<body style="background-color:LightGoldenRodYellow">
   {% with messages = get_flashed_messages() %}
             {% if messages %}
           <div class="alert alert-info" role="alert">
@@ -23,7 +23,7 @@
   <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/" style="font-size:130%">Главная</a></li>
+        <li><a href="/" style="font-size:125%">Главная</a></li>
         <li><a href="/alphabet" style="font-size:125%">Алфавит</a></li>
         <li><a href="/syllables" style="font-size:125%">Слоги</a></li>
         <li><a href="/register" style="font-size:125%">Зарегистрироваться</a></li>
