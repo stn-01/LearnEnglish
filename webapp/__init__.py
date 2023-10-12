@@ -1,5 +1,8 @@
 import os
 
+from alphabet import ALPHABET
+from syllables import SYLLABLES
+
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask import Flask, render_template, flash, url_for, redirect
@@ -35,11 +38,22 @@ def create_app():
 
     @app.route('/alphabet')
     def alphabet_page():
-        return render_template('alphabet.html', page_title='Алфавит')
+        alphabet_for_render_template = {f"{letter}_letter": ALPHABET[letter] for letter in 'abcdefghijklmnopqrstuvwxyz'}
+        return render_template('alphabet.html', page_title='Алфавит', **alphabet_for_render_template)
 
     @app.route('/syllables')
     def syllables_page():
-        return render_template('syllables.html', page_title='Слоги')
+        syllables = ''
+        return render_template('syllables.html', page_title='Слоги', syllables=syllables)
+
+    @app.route('/syllables/<letter>')
+    def letter_syllables_page(letter):
+        syllables = SYLLABLES.get(letter)
+        if not syllables:
+            return render_template('index.html', page_title=f'Слоги c {letter.upper()}')
+        return render_template('syllables.html', page_title=f'Слоги c {letter.upper()}', syllables=syllables,
+                               letter=letter)
+
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
