@@ -9,8 +9,9 @@ SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'postgresql+psycopg
 SECRET_KEY = 'vdv$gEFw!fker329fdslsdjkge#geww*vqwvsvl'
 
 MAIL_SERVER = 'smtp.gmail.com'
-MAIL_PORT = 465
+MAIL_PORT = 587
 MAIL_USE_TLS = True
-MAIL_USE_SSL = True
+MAIL_USE_SSL = False
 MAIL_USERNAME = 'learnenglish.lp.project@gmail.com'
-MAIL_PASSWORD = 'qwerty123ASD!'
+MAIL_DEFAULT_SENDER = 'learnenglish.lp.project@gmail.com'
+MAIL_PASSWORD = 'wsnj pogh kubv xeke'
