@@ -24,27 +24,36 @@
 {% endwith %}
   <nav class="green lighten-1" role="navigation">
 <body style="background-color:LightGoldenRodYellow">
+  {% with messages = get_flashed_messages() %}
+            {% if messages %}
+          <div class="alert alert-info" role="alert">
+          {% for message in messages %}
+            {{ message }}<br>
+          {% endfor %}
+          </div>
+          {% endif %}
+            {% endwith %}
   <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/" style="font-size:150%;">Главная</a></li>
-        <li><a href="/alphabet" style="font-size:150%;">Алфавит</a></li>
-        <li><a href="/syllables" style="font-size:150%;">Слоги</a></li>
-        <li><a href="/register">Зарегистрироваться</a></li>
-        <li><a href="/login">Войти</a></li>
-        <li><a href="/logout">Выйти</a></li>
-        <li><a href="/admin">Админка</a></li>
+        <li><a href="/" style="font-size:125%">Главная</a></li>
+        <li><a href="/alphabet" style="font-size:125%">Алфавит</a></li>
+        <li><a href="/syllables" style="font-size:125%">Слоги</a></li>
+        <li><a href="/register" style="font-size:125%">Зарегистрироваться</a></li>
+        <li><a href="/login" style="font-size:125%">Войти</a></li>
+        <li><a href="/logout" style="font-size:125%">Выйти</a></li>
+        <li><a href="/admin" style="font-size:125%">Админка</a></li>
       </ul>
-
       <ul id="nav-mobile" class="sidenav green darken-1">
         <br>
-        <li><a href="/"><h6 class="white-text">Главная</h6></a></li>
-        <li><a href="/alphabet"><h6 class="white-text">Алфавит</h6></a></li>
-        <li><a href="/syllables"><h6 class="white-text">Слоги</h6></a></li>
-        <li><a href="/register">Зарегистрироваться</a></li>
-        <li><a href="/login">Войти</a></li>
-        <li><a href="/logout">Выйти</a></li>
-        <li><a href="/admin">Админка</a></li>
+        <li><a href="/" style="color:White; font-size:150%">Главная</a></li>
+        <li><a href="/alphabet" style="color:White; font-size:150%">Алфавит</a></li>
+        <li><a href="/syllables" style="color:White; font-size:150%">Слоги</a></li>
+        <li><br></li>
+        <li><a href="/register" style="color:White; font-size:150%">Зарегистрироваться</a></li>
+        <li><a href="/login" style="color:White; font-size:150%">Войти</a></li>
+        <li><a href="/logout" style="color:White; font-size:150%">Выйти</a></li>
+        <li><a href="/admin" style="color:White; font-size:150%">Админка</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
