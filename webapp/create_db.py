@@ -1,5 +1,5 @@
 import psycopg2
-from webapp.config import NAME, NAME_DB, PASSWORD
+from config import NAME, NAME_DB, PASSWORD
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
