@@ -4,7 +4,6 @@ from flask_login import login_required, current_user
 from flask_admin.contrib.sqla import ModelView
 
 
-
 class DashboardView(AdminIndexView):
     @expose('/', methods=['GET'])
     @login_required
@@ -19,4 +18,3 @@ class DashboardView(AdminIndexView):
 
 class UserView(ModelView):
     column_list = ('id', 'name', 'nickname', 'email', 'role')
-
