@@ -1,11 +1,11 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
-
-<a href="{{ url_for('homepage') }}" style="position: absolute; top: 10px; right: 10px;">На главную</a>
-  <h1>Наша админка будет тут</h1>
-  <p>Всё, что написано здесь, написано для примера. Позже придумаем, какую информацию
-    будем тут выводить.
-  </p>
-  
+    <div class="container">
+      <a href="/" class="waves-effect waves-light btn" 
+      style="position: fixed; top: 50px; right: 75px;">
+      <i class="material-icons">На главную</i></a>
+      <h1>Наша админка будет тут</h1>
+      <p>Всё, что написано здесь, написано для примера. Позже придумаем, какую информацию будем тут выводить.</p>
+    </div>
 {% endblock %}
