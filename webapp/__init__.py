@@ -8,9 +8,11 @@ from flask import Flask, render_template, flash, url_for, redirect
 from flask_login import (LoginManager, current_user,
                          login_user, logout_user)
 from flask_materialize import Material
+from flask_mail import Mail, Message
 from webapp.admin_panel import DashboardView, UserView
 from webapp.models import db, User
 from webapp.forms import LoginForm, RegisterForm
+from webapp.config import MAIL_DEFAULT_SENDER
 
 
 def create_app():
@@ -27,6 +29,8 @@ def create_app():
                   endpoint='admin')
     material = Material(app)
     admin.add_view(UserView(User, db.session, name='Пользователи'))
+
+    mail = Mail(app)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -94,10 +98,22 @@ def create_app():
             db.session.add(new_user)
             db.session.commit()
             flash('Вы успешно зарегистрировались. Войдите в аккаунт!')
-            return redirect(url_for('login'))
+            return send_welcome_email_test(new_user.email)
         return render_template('login.html', page_title=title,
                                login_form=login_form,
                                register_form=register_form)
+
+    @app.route('/send-first-msg')
+    def send_welcome_email_test(email_to):
+        user = User.query.filter_by(email=email_to).first()
+        if not user:
+            return redirect(url_for('login'))
+        msg = Message(sender=MAIL_DEFAULT_SENDER,
+                      recipients=[email_to])
+        welcome_email = render_template('email/welcome.html', user=user)
+        msg.html = welcome_email
+        mail.send(msg)
+        return redirect(url_for('login'))
 
     @app.route('/logout')
     def logout():
