@@ -25,9 +25,7 @@
   <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
-<!-- Тут надо вставит проверку, если юзер не зареган, то показывать только кнопки "Зарег-ся" и "войти"  -->
         <li><a href="/" style="font-size:100%">Главная</a></li>
-<!-- Тут надо вставит проверку, если юзер вошел, то показывать кнопку "Зарег-ся" не надо  -->
         {% if current_user.is_authenticated %}
         <li><a href="/content/alphabet" style="font-size:100%">Алфавит</a></li>
         <li><a href="/content/syllables" style="font-size:100%">Слоги</a></li>
