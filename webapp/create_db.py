@@ -1,4 +1,3 @@
-import psycopg2
 from webapp.config import NAME, NAME_DB, PASSWORD
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -10,4 +9,3 @@ db_session = scoped_session(sessionmaker(bind=engine))
 
 Base = declarative_base()
 Base.query = db_session.query_property()
-
