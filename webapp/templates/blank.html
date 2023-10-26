@@ -29,6 +29,7 @@
         {% if current_user.is_authenticated %}
         <li><a href="/content/alphabet" style="font-size:100%">Алфавит</a></li>
         <li><a href="/content/syllables" style="font-size:100%">Слоги</a></li>
+        <li><a href="{{ url_for('users.profile', nickname=current_user.nickname) }}" style="font-size:100%">Профиль</a></li>
         <li><a href="/users/logout" style="font-size:100%">Выйти</a></li>
         {% else %}
         <li><a href="/users/register" style="font-size:100%">Зарегистрироваться</a></li>

@@ -27,7 +27,6 @@ def create_app():
                   endpoint='admin')
     material = Material(app)
     admin.add_view(UserView(User, db.session, name='Пользователи'))
-    # mail = Mail(app)
 
     app.register_blueprint(blueprint_user)
     app.register_blueprint(blueprint_mail)
