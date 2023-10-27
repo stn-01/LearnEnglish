@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, flash, url_for, redirect
+from flask import (Blueprint, render_template,
+                   flash, url_for, redirect)
 from flask_login import (current_user,
                          login_user, logout_user)
 from webapp.user.models import db, User
-from webapp.user.forms import LoginForm, RegisterForm
-from webapp.email.send_email import send_welcome_email
+from webapp.user.forms import (LoginForm, RegisterForm,
+                               ResetPasswordRequestForm, ResetPasswordForm)
+from webapp.email.send_email import (send_welcome_email,
+                                     send_password_reset_email)
 
 blueprint = Blueprint('users', __name__, url_prefix='/users')
 
@@ -72,3 +75,50 @@ def process_login():
             return redirect(url_for('homepage'))
     flash('Неправильный логин(никнейм) или пароль')
     return redirect(url_for('users.login'))
+
+
+@blueprint.route('/profile/<nickname>')
+def profile(nickname):
+    page_title = 'Профиль'
+    user = User.query.filter_by(nickname=nickname).first()
+    return render_template('profile.html', user=user, page_title=page_title)
+
+
+@blueprint.route('/reset-password-request', methods=['GET', 'POST'])
+def reset_password_request():
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        if not User.query.filter(User.email == form.email.data).count():
+            flash('Ошибка! Пользователь с такой электронной почтой'
+                  ' не найден')
+            return redirect(url_for('users.reset_password_request'))
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('На указанную почту отправлены'
+              ' инструкции по восстановлению пароля')
+        return redirect(url_for('users.login'))
+    return render_template('reset_password.html',
+                           title='Сброс пароля', form=form)
+
+
+@blueprint.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('homepage'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('homepage'))
+    reset_form = ResetPasswordForm()
+    if reset_form.validate_on_submit():
+        if reset_form.password1.data == reset_form.password2.data:
+            new_password = reset_form.password1.data
+            user.set_password(new_password)
+            db.session.merge(user)
+            db.session.commit()
+            flash('Ваш пароль успешно изменен')
+            return redirect(url_for('users.login'))
+        else:
+            flash('Пароли не совпадают!')
+    return render_template('new_password.html',
+                           title='Сброс пароля', reset_form=reset_form)

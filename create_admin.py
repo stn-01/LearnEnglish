@@ -25,10 +25,12 @@ with app.app_context():
         print('Вы ввели разные пароли!')
         sys.exit(0)
 
-    new_admin = User(name=user_name, email=email, nickname=nickname, role='admin')
+    new_admin = User(name=user_name, email=email,
+                     nickname=nickname, role='admin')
     new_admin.set_password(password_1)
 
     db.session.add(new_admin)
     db.session.commit()
-    print(f'Пользователь {user_name} с ником {nickname} успешно зарегистрирован. '
+    print(f'Пользователь {user_name} с ником {nickname}'
+          ' успешно зарегистрирован. '
           f'Роль - админ. id={new_admin.id}')

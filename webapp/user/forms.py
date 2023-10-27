@@ -14,7 +14,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Введите пароль:',
                              validators=[DataRequired()],
                              render_kw={'class': 'form-control'})
-    reapet_password = PasswordField('Повторите пароль:',
+    repeat_password = PasswordField('Повторите пароль:',
                                     validators=[DataRequired(),
                                                 EqualTo('password')],
                                     render_kw={'class': 'form-control'})
@@ -25,8 +25,27 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     nickname2 = StringField('Ваш никнейм:', validators=[DataRequired()],
                             render_kw={'class': 'form-control'})
-    password2 = PasswordField('Введите свой пароль:', validators=[DataRequired()],
+    password2 = PasswordField('Введите свой пароль:',
+                              validators=[DataRequired()],
                               render_kw={'class': 'form-control'})
     submit2 = SubmitField('Войти', render_kw={'class': 'btn btn-success'})
     remember_me = BooleanField('Запомнить меня', default=True,
                                render_kw={"class": "form-check-input"})
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Введите почту, к которой привязан ваш аккаунт',
+                        validators=[DataRequired(), Email()],
+                        render_kw={'class': 'form-control'})
+    submit = SubmitField('Сбросить пароль',
+                         render_kw={'class': 'btn btn-success'})
+
+
+class ResetPasswordForm(FlaskForm):
+    password1 = PasswordField('Введите новый пароль:',
+                              validators=[DataRequired()],
+                              render_kw={'class': 'form-control'})
+    password2 = PasswordField('Повторите пароль:', validators=[DataRequired()],
+                              render_kw={'class': 'form-control'})
+    submit = SubmitField('Применить новый пароль',
+                         render_kw={'class': 'btn btn-success'})

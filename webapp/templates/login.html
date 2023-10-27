@@ -1,78 +1,59 @@
-
-<!doctype html>
-<html lang="ru">
-  <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <body>
-    <div class="container">
-    <h3>{{ page_title }}</h3>
-    <div class="row">
-      {% with messages = get_flashed_messages() %} 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="card blue lighten-4"> 
-                        <div class="card-content">
-                            <p>{{ message }}</p> 
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %} 
-        {% if show_register %}
-          <div class="col-6">
-            <form action="" method="POST">
-                {{ register_form.hidden_tag() }}
-                <h5>Регистрация</h5>
-                <div class="input-field">
-                {{ register_form.user_name.label }}<br>{{ register_form.user_name() }}
-                </div>
-                <div class="input-field">
-                {{ register_form.nickname.label }}<br>{{ register_form.nickname() }}
-                </div>
-                <div class="input-field">
-                {{ register_form.email.label }}<br>{{ register_form.email() }}
-                </div>
-                <div class="input-field">
-                  {{ register_form.password.label }}<br>{{ register_form.password() }}
-                </div>
-                <div class="input-field">
-                  {{ register_form.reapet_password.label }}<br>{{ register_form.reapet_password() }}
-                </div>
-                {{ register_form.submit }}
-            </form>
-          </div>
-        {% else %}
-          <div class="col-6">
-            <form action="{{ url_for('users.process_login') }}" method="POST">
+{% extends "blank.html" %}
+{% block body %}
+<div class="container">
+  <h3>{{ page_title }}</h3>
+  <div class="row">
+      {% if show_register %}
+        <div class="col-6">
+          <form action="" method="POST">
+              {{ register_form.hidden_tag() }}
+              <h5>Регистрация</h5>
+              <div class="input-field">
+              {{ register_form.user_name.label }}<br>{{ register_form.user_name() }}
+              </div>
+              <div class="input-field">
+              {{ register_form.nickname.label }}<br>{{ register_form.nickname() }}
+              </div>
+              <div class="input-field">
+              {{ register_form.email.label }}<br>{{ register_form.email() }}
+              </div>
+              <div class="input-field">
+                {{ register_form.password.label }}<br>{{ register_form.password() }}
+              </div>
+              <div class="input-field">
+                {{ register_form.repeat_password.label }}<br>{{ register_form.repeat_password() }}
+              </div>
+              {{ register_form.submit }}
+          </form>
+        </div>
+      {% else %}
+        <div class="col-6">
+          <form action="{{ url_for('users.process_login') }}" method="POST">
               {{ login_form.hidden_tag() }}
-              <h5>Авторизация</h5>
-              <div class="input-field">
+            <h5>Авторизация</h5>
+            <div class="input-field">
               {{ login_form.nickname2.label }}<br>{{ login_form.nickname2() }}
-              </div>
-              <div class="input-field">
+            </div>
+            <div class="input-field">
               {{ login_form.password2.label }}<br>{{ login_form.password2() }}
-              </div>
-              <div>
-                <label>
-                  {{ login_form.remember_me(class_="filled-in", id="filled-in-box") }}
-                  <span class="black-text">{{ login_form.remember_me.label.text }}</span>
-              </label>
-              </div>
-            {{ login_form.submit2 }}
-            </form>    
-          </div>
-          {% endif %}
-    </div>
-    </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+            </div>
+            <div>
+              <label>
+                {{ login_form.remember_me(class_="filled-in", id="filled-in-box") }}
+                <span class="black-text">{{ login_form.remember_me.label.text }}</span>
+                <br>
+            </label>
+            </div>
+              <br>
+                {{ login_form.submit2 }}<br>
+                <br>
+                <a href="{{ url_for('users.reset_password_request' )}}" target="_blank">Забыли пароль?</a>
+          </form>    
+        </div>
+        {% endif %}
+  </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-
-
+{% endblock %}
