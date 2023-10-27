@@ -3,7 +3,6 @@ import os
 from flask_admin import Admin
 from flask import Flask, render_template
 from flask_login import LoginManager
-from flask_materialize import Material
 from webapp.admin_panel import DashboardView, UserView
 from webapp.user.models import db, User
 
@@ -25,7 +24,6 @@ def create_app():
 
     admin = Admin(app, index_view=DashboardView(),
                   endpoint='admin')
-    material = Material(app)
     admin.add_view(UserView(User, db.session, name='Пользователи'))
 
     app.register_blueprint(blueprint_user)

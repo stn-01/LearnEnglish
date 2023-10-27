@@ -114,6 +114,7 @@ def reset_password(token):
         if reset_form.password1.data == reset_form.password2.data:
             new_password = reset_form.password1.data
             user.set_password(new_password)
+            db.session.merge(user)
             db.session.commit()
             flash('Ваш пароль успешно изменен')
             return redirect(url_for('users.login'))

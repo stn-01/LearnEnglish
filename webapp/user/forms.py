@@ -25,7 +25,8 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     nickname2 = StringField('Ваш никнейм:', validators=[DataRequired()],
                             render_kw={'class': 'form-control'})
-    password2 = PasswordField('Введите свой пароль:', validators=[DataRequired()],
+    password2 = PasswordField('Введите свой пароль:',
+                              validators=[DataRequired()],
                               render_kw={'class': 'form-control'})
     submit2 = SubmitField('Войти', render_kw={'class': 'btn btn-success'})
     remember_me = BooleanField('Запомнить меня', default=True,
