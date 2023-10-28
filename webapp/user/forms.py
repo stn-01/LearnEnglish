@@ -49,3 +49,28 @@ class ResetPasswordForm(FlaskForm):
                               render_kw={'class': 'form-control'})
     submit = SubmitField('Применить новый пароль',
                          render_kw={'class': 'btn btn-success'})
+
+
+class ChangeNameForm(FlaskForm):
+    new_name = StringField('Ваше новое имя:', validators=[DataRequired()],
+                           render_kw={'class': 'form-control'})
+    submit = SubmitField('Сохранить',
+                         render_kw={'class': 'btn btn-success'})
+
+
+class ChangeEmailForm(FlaskForm):
+    new_email = StringField('Введите почту, которую '
+                            'вы хотите привязать к аккаунту',
+                            validators=[DataRequired(), Email()],
+                            render_kw={'class': 'form-control'})
+    submit = SubmitField('Сохранить',
+                         render_kw={'class': 'btn btn-success'})
+
+
+class ChangeNicknameForm(FlaskForm):
+    new_nickname = StringField('Введите новый никнейм, с которым '
+                               'Вы будете входить в аккаунт:',
+                               validators=[DataRequired()],
+                               render_kw={'class': 'form-control'})
+    submit = SubmitField('Сохранить',
+                         render_kw={'class': 'btn btn-success'})
