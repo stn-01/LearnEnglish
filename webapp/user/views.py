@@ -4,7 +4,9 @@ from flask_login import (current_user,
                          login_user, logout_user)
 from webapp.user.models import db, User
 from webapp.user.forms import (LoginForm, RegisterForm,
-                               ResetPasswordRequestForm, ResetPasswordForm)
+                               ResetPasswordRequestForm, ResetPasswordForm,
+                               ChangeEmailForm, ChangeNameForm,
+                               ChangeNicknameForm)
 from webapp.email.send_email import (send_welcome_email,
                                      send_password_reset_email)
 
@@ -122,3 +124,93 @@ def reset_password(token):
             flash('Пароли не совпадают!')
     return render_template('new_password.html',
                            title='Сброс пароля', reset_form=reset_form)
+
+
+@blueprint.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    if not current_user.is_authenticated:
+        return redirect(url_for('users.login'))
+    user = User.query.get(current_user.id)
+    reset_form = ResetPasswordForm()
+    if reset_form.validate_on_submit():
+        if reset_form.password1.data == reset_form.password2.data:
+            new_password = reset_form.password1.data
+            user.set_password(new_password)
+            db.session.merge(user)
+            db.session.commit()
+            flash('Ваш пароль успешно изменен')
+            return redirect(url_for('users.profile', nickname=user.nickname))
+        else:
+            flash('Пароли не совпадают!')
+    return render_template('new_password.html',
+                           title='Изменение пароля', reset_form=reset_form)
+
+
+@blueprint.route('/change_name', methods=['GET', 'POST'])
+def change_name():
+    if not current_user.is_authenticated:
+        return redirect(url_for('users.login'))
+    user = User.query.get(current_user.id)
+    name_form = ChangeNameForm()
+    if name_form.validate_on_submit():
+        new_name = name_form.new_name.data
+        user.name = new_name
+        db.session.merge(user)
+        db.session.commit()
+        flash('Ваше имя успешно изменено')
+        return redirect(url_for('users.profile', nickname=user.nickname))
+    return render_template('change_user_data.html',
+                           title='Изменение имени пользователя',
+                           name_form=name_form,
+                           show_new_nickname=False,
+                           show_new_name=True,
+                           show_new_email=False)
+
+
+@blueprint.route('/change_email', methods=['GET', 'POST'])
+def change_email():
+    if not current_user.is_authenticated:
+        return redirect(url_for('users.login'))
+    user = User.query.get(current_user.id)
+    email_form = ChangeEmailForm()
+    if email_form.validate_on_submit():
+        print(email_form.errors)
+        new_email = email_form.new_email.data
+        if User.query.filter(User.email == new_email).first():
+            return flash('Ошибка! Пользователь с такой электронной почтой'
+                         'уже зарегистрирован')
+        user.email = new_email
+        db.session.merge(user)
+        db.session.commit()
+        flash('Ваша почта успешно изменена')
+        return redirect(url_for('users.profile', nickname=user.nickname))
+    return render_template('change_user_data.html',
+                           title='Изменение почты пользователя',
+                           email_form=email_form,
+                           show_new_nickname=False,
+                           show_new_name=False,
+                           show_new_email=True)
+
+
+@blueprint.route('/change_nickname', methods=['GET', 'POST'])
+def change_nickname():
+    if not current_user.is_authenticated:
+        return redirect(url_for('users.login'))
+    user = User.query.get(current_user.id)
+    nickname_form = ChangeNicknameForm()
+    if nickname_form.validate_on_submit():
+        new_nickname = nickname_form.new_nickname.data
+        if User.query.filter(User.nickname == new_nickname).first():
+            return flash('Ошибка! Пользователь с таким ником уже'
+                         'зарегистрирован')
+        user.nickname = new_nickname
+        db.session.merge(user)
+        db.session.commit()
+        flash('Ваш никнейм успешно изменен')
+        return redirect(url_for('users.profile', nickname=user.nickname))
+    return render_template('change_user_data.html',
+                           title='Изменение никнейма пользователя',
+                           nickname_form=nickname_form,
+                           show_new_nickname=True,
+                           show_new_name=False,
+                           show_new_email=False)

@@ -1,0 +1,49 @@
+{% extends "blank.html" %}
+{% block body %}
+{% if show_new_nickname %}
+<div class="container">
+    <h3>{{ page_title }}</h3>
+    <div class="row">
+        <div class="col-6">
+        <form action="" method="POST">
+            {{ nickname_form.hidden_tag() }}
+            <div class="input-field">
+                {{ nickname_form.new_nickname.label }}<br>{{ nickname_form.new_nickname() }}
+            </div><br>
+            {{ nickname_form.submit }}
+        </form>
+        </div>
+    </div>
+</div>
+{% elif show_new_name %}
+<div class="container">
+    <h3>{{ page_title }}</h3>
+    <div class="row">
+        <div class="col-6">
+        <form action="" method="POST">
+            {{ name_form.hidden_tag() }}
+            <div class="input-field">
+                {{ name_form.new_name.label }}<br>{{ name_form.new_name() }}
+            </div><br>
+            {{ name_form.submit }}
+        </form>
+        </div>
+    </div>
+</div>
+{%elif show_new_email %}
+<div class="container">
+    <h3>{{ page_title }}</h3>
+    <div class="row">
+        <div class="col-6">
+        <form action="" method="POST">
+            {{ email_form.hidden_tag() }}
+            <div class="input-field">
+                {{ email_form.new_email.label }}<br>{{ email_form.new_email() }}
+            </div><br>
+            {{ email_form.submit }}
+        </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
