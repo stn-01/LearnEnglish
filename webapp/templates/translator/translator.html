@@ -1,0 +1,22 @@
+{% extends 'blank.html' %}
+{% block body %}
+<div class="container">
+    <h3>{{ page_title }}</h3>
+    <form method="POST" action="{{ url_for('translator.translator_func') }}">
+      {{ form.hidden_tag() }}
+      <div class="input-field">
+        {{ form.text.label }}
+        {{ form.text (class='materialize-textarea') }}
+      </div>
+      <br><br>
+      <div class="input-field">
+        {{ form.translation.label }}
+        {{ form.translation (class='materialize-textarea', readonly=True) }}
+      </div>
+      <br>
+      {{ form.submit }}
+      <br><br>
+    </form>
+  </div>
+
+{% endblock %}
