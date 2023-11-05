@@ -9,6 +9,7 @@ SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'postgresql+psycopg
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SECRET_KEY = 'vdv$gEFw!fker329fdslsdjkge#geww*vqwvsvl'
+SESSION_TYPE = 'filesystem'
 
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587

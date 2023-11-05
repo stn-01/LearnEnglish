@@ -5,11 +5,11 @@
     <form method="POST" action="{{ url_for('translator.translator_func') }}">
       {{ form.hidden_tag() }}
       <div class="input-field">
-        {{ form.text.label }}
-        {{ form.text (class='materialize-textarea') }}
+        <textarea id="textarea1" name="text" class="materialize-textarea"></textarea>
+        <label for="textarea1">{{ form.text.label }}</label>
       </div>
       <br><br>
-      <div class="input-field">
+      <div>
         {{ form.translation.label }}
         {{ form.translation (class='materialize-textarea', readonly=True) }}
       </div>
