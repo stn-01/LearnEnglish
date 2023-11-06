@@ -12335,3 +12335,8 @@ $jscomp.polyfill = function (e, r, p, m) {
 
   Range.init($('input[type=range]'));
 })(cash, M.anime);
+
+
+$( document ).ready(function() {
+  $('.dropdown-trigger').dropdown();
+});

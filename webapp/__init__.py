@@ -9,6 +9,8 @@ from webapp.user.models import db, User
 from webapp.user.views import blueprint as blueprint_user
 from webapp.email.send_email import blueprint as blueprint_mail
 from webapp.content.views import blueprint as blueprint_content
+from webapp import config
+from webapp.translator.views import blueprint as blueprint_translator
 
 
 
@@ -18,6 +20,8 @@ def create_app():
     app.config.from_pyfile('config.py')
     app.app_context().push()
     db.init_app(app)
+    app.secret_key = config.SECRET_KEY
+    app.config['SESSION_TYPE'] = config.SESSION_TYPE
 
     login_manager = LoginManager()
     login_manager.init_app(app)
@@ -30,6 +34,7 @@ def create_app():
     app.register_blueprint(blueprint_user)
     app.register_blueprint(blueprint_mail)
     app.register_blueprint(blueprint_content)
+    app.register_blueprint(blueprint_translator)
 
 
     @login_manager.user_loader

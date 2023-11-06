@@ -12,3 +12,8 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+.materialize-textarea {
+  resize: vertical;
+  height: auto;
+  overflow-y: auto;
+  }
