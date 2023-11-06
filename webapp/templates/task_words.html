@@ -5,13 +5,15 @@
     <p>{{ user.name }}, перед тобой будет появляться случайное слово на английском языке,</p>
     <p>в соответствующем поле ниже введи перевод этого слова.</p>
     <br><br><br>
-    <h4>{{random_word}}</h4>
+    <h4>{{ random_word }}</h4>
     <form action="{{ url_for('content.task_words') }}" method="POST">
-    <div class="input-field">
-        {{ form.translation.label }}<br>{{ form.translation() }}
-    </div>
-    {{ form.submit }}
+        {{ form.csrf_token }}
+        <div class="input-field">
+            {{ form.translation.label }}<br>
+            {{ form.translation(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-success") }}
     </form>
     <br><br>
-
+</div>
 {% endblock %}

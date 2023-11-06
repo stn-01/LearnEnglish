@@ -31,10 +31,16 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/" style="font-size:100%">Главная</a></li>
         {% if current_user.is_authenticated %}
-        <li><a href="/content/alphabet" style="font-size:100%">Алфавит</a></li>
-        <li><a href="/content/syllables" style="font-size:100%">Слоги</a></li>
-        <li><a href="/translator/translate" style="font-size:100%">Переводчик</a></li>
-        <li><a href="/content/words" style="font-size:100%">Переведи слово</a></li>
+        <li>
+          <a class="dropdown-trigger" href="#" data-target="dropdown1">Обучение<i class="material-icons right">arrow_drop_down</i></a>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/content/alphabet" style="font-size:100%">Алфавит</a></li>
+            <li><a href="/content/syllables" style="font-size:100%">Слоги</a></li>
+            <li class="divider"></li>
+            <li><a href="/translator/translate" style="font-size:100%">Переводчик</a></li>
+            <li><a href="/content/words" style="font-size:100%">Переведи слово</a></li>
+          </ul>
+        </li>
         <li><a href="{{ url_for('users.profile', nickname=current_user.nickname) }}" style="font-size:100%">Профиль</a></li>
         <li><a href="/users/logout" style="font-size:100%">Выйти</a></li>
         {% else %}

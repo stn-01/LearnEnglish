@@ -1,10 +1,9 @@
-import time
 from alphabet import ALPHABET
 from random import choice
 from syllables import SYLLABLES
 
-from flask import (Blueprint, render_template, flash, redirect,
-                   url_for, request)
+from flask import (Blueprint, render_template, flash,
+                   url_for, session, redirect)
 from flask_login import current_user
 from webapp.content.forms import WordsForm
 from webapp.user.models import User
@@ -43,7 +42,7 @@ def task_words():
     title = 'Переведи слово'
     user = User.query.get(current_user.id)
     words = {'dog': 'собака', 'cat': 'кошка', 'time': 'время', 'house': 'дом',
-             'world': 'мир', 'father': 'папа', 'mother': 'мама',
+             'world': 'мир', 'father': 'отец', 'mother': 'мать',
              'year': 'год', 'big': 'большой', 'fire': 'огонь',
              'king': 'король', 'moon': 'луна', 'river': 'река',
              'lake': 'озеро', 'city': 'город', 'gold': 'золото',
@@ -53,24 +52,30 @@ def task_words():
              'price': 'цена', 'forest': 'лес', 'window': 'окно',
              'sky': 'небо', 'job': 'работа', 'hope': 'надежда'}
     form = WordsForm()
-    random_word = choice(list(words.keys()))
-    print(random_word)
+    random_word = ''
     if form.validate_on_submit():
-        print('good')
         translation = form.translation.data
-        if translation and translation == words[random_word]:
+        if 'random_word' not in session:
+            session['random_word'] = choice(list(words.keys()))
+        random_word = session['random_word']
+        print(random_word, '-', words[random_word], translation)
+        if words[random_word] == translation:
             flash('Верно! Так держать! Теперь вот это:')
-            time.sleep(5)
-            print('flash good')
-            return redirect(url_for('content.task_words'), code=303,
-                            method=request.method)
+            return redirect(url_for('content.task_words'))
         else:
-            flash('Упс! Ошибочка вышла! Подумай ещё!'
-                  'Пока вот тебе другое слово')
-            time.sleep(5)
-            print('flash no')
-            return redirect(url_for('content.task_words'), code=303,
-                            method=request.method)
+            flash('Упс! Ошибочка вышла!'
+                  ' Подумай ещё! Пока вот тебе другое слово')
+            return redirect(url_for('content.task_words'))
+
+    if 'random_word' not in session:
+        session['random_word'] = choice(list(words.keys()))
+    random_word = session['random_word']
+    if 'random_word' in session:
+        random_word = choice(list(words.keys()))
+        session['random_word'] = random_word
+    else:
+        random_word = session['random_word']
     form.translation.data = ''
-    return render_template('task_words.html', form=form, page_title=title,
-                           random_word=random_word, user=user)
+    return render_template('task_words.html', form=form,
+                           page_title=title, random_word=random_word,
+                           user=user)

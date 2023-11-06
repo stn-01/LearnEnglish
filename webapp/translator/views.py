@@ -1,5 +1,5 @@
 from translate import Translator
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for, request
 from webapp.translator.forms import TranslatorForm
 
 
@@ -17,5 +17,7 @@ def translator_func():
             return redirect(url_for('translator.translator_func'))
         translated_text = translator.translate(form.text.data)
         form.translation.data = translated_text
+    else:
+        form.text.data = request.args.get('text', '')
     return render_template('translator/translator.html', form=form,
                            page_title=title)
