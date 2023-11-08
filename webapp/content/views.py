@@ -58,7 +58,6 @@ def task_words():
         if 'random_word' not in session:
             session['random_word'] = choice(list(words.keys()))
         random_word = session['random_word']
-        print(random_word, '-', words[random_word], translation)
         if words[random_word] == translation:
             flash('Верно! Так держать! Теперь вот это:')
             return redirect(url_for('content.task_words'))
@@ -66,7 +65,6 @@ def task_words():
             flash('Упс! Ошибочка вышла!'
                   ' Подумай ещё! Пока вот тебе другое слово')
             return redirect(url_for('content.task_words'))
-
     if 'random_word' not in session:
         session['random_word'] = choice(list(words.keys()))
     random_word = session['random_word']
