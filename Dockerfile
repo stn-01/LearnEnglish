@@ -9,5 +9,4 @@ RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 RUN pip install --upgrade pip && pip install -r requirements.txt
 EXPOSE 5000
 COPY . .
-
 CMD ["flask", "run"]

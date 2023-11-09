@@ -13,6 +13,7 @@ from webapp import config
 from webapp.translator.views import blueprint as blueprint_translator
 
 
+
 def create_app():
     app = Flask(__name__, template_folder=os.path.join(os.getcwd(),
                 'webapp/templates'))
@@ -34,6 +35,7 @@ def create_app():
     app.register_blueprint(blueprint_mail)
     app.register_blueprint(blueprint_content)
     app.register_blueprint(blueprint_translator)
+
 
     @login_manager.user_loader
     def load_user(user_id):
