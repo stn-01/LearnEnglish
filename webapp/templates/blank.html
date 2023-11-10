@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>{{ page_title }}</title>
 
-  <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -22,23 +21,6 @@
     </div>
   {% endif %}
 {% endwith %}
-  <nav class="green lighten-1" role="navigation">
-<body style="background-color:LightGoldenRodYellow">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <div class="row">
-        <div class="col s7">
-          {% for message in messages %}
-            <div class="card blue lighten-4">
-              <div class="card-content">
-                <p>{{ message }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-  {% endwith %}
   <nav class="green darken-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">LearnEnglish</a>
       <ul class="right hide-on-med-and-down">
@@ -67,8 +49,8 @@
       <ul id="nav-mobile" class="sidenav green darken-1">
         <br>
         <li><a href="/" style="color:White; font-size:150%">Главная</a></li>
-        <li><a href="/alphabet" style="color:White; font-size:150%">Алфавит</a></li>
-        <li><a href="/syllables" style="color:White; font-size:150%">Слоги</a></li>
+        <li><a href="/content/alphabet" style="color:White; font-size:150%">Алфавит</a></li>
+        <li><a href="/content/syllables" style="color:White; font-size:150%">Слоги</a></li>
         <li><br></li>
         <li><a href="/register" style="color:White; font-size:150%">Зарегистрироваться</a></li>
         <li><a href="/login" style="color:White; font-size:150%">Войти</a></li>
@@ -88,7 +70,6 @@
         <div class="col l6 s12">
           <h5 class="white-text">Company Bio</h5>
           <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
 
         </div>
         <div class="col l3 s12">
@@ -114,8 +95,6 @@
     </div>
   </footer>
 
-
-  <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
   <script src="{{ url_for('static', filename='js/init.js') }}"></script>
