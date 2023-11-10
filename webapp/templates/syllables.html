@@ -3,32 +3,32 @@
 <div class="container">
     <div class="row center" style="background-color:DodgerBlue; color:White; font-size:150%;">Выберите букву для отображения слогов.</div>
     <div class="row center">
-        <a href="/syllables/a" style="font-size:150%">A</a>
-        <a href="/syllables/b" style="font-size:150%">B</a>
-        <a href="/syllables/c" style="font-size:150%">C</a>
-        <a href="/syllables/d" style="font-size:150%">D</a>
-        <a href="/syllables/e" style="font-size:150%">E</a>
-        <a href="/syllables/f" style="font-size:150%">F</a>
-        <a href="/syllables/g" style="font-size:150%">G</a>
-        <a href="/syllables/h" style="font-size:150%">H</a>
-        <a href="/syllables/i" style="font-size:150%">I</a>
-        <a href="/syllables/j" style="font-size:150%">J</a>
-        <a href="/syllables/k" style="font-size:150%">K</a>
-        <a href="/syllables/l" style="font-size:150%">L</a>
-        <a href="/syllables/m" style="font-size:150%">M</a>
-        <a href="/syllables/n" style="font-size:150%">N</a>
-        <a href="/syllables/o" style="font-size:150%">O</a>
-        <a href="/syllables/p" style="font-size:150%">P</a>
-        <a href="/syllables/q" style="font-size:150%">Q</a>
-        <a href="/syllables/r" style="font-size:150%">R</a>
-        <a href="/syllables/s" style="font-size:150%">S</a>
-        <a href="/syllables/t" style="font-size:150%">T</a>
-        <a href="/syllables/u" style="font-size:150%">U</a>
-        <a href="/syllables/v" style="font-size:150%">V</a>
-        <a href="/syllables/w" style="font-size:150%">W</a>
-        <a href="/syllables/x" style="font-size:150%">X</a>
-        <a href="/syllables/y" style="font-size:150%">Y</a>
-        <a href="/syllables/z" style="font-size:150%">Z</a>
+        <a href="/content/syllables/a" style="font-size:150%">A</a>
+        <a href="/content/syllables/b" style="font-size:150%">B</a>
+        <a href="/content/syllables/c" style="font-size:150%">C</a>
+        <a href="/content/syllables/d" style="font-size:150%">D</a>
+        <a href="/content/syllables/e" style="font-size:150%">E</a>
+        <a href="/content/syllables/f" style="font-size:150%">F</a>
+        <a href="/content/syllables/g" style="font-size:150%">G</a>
+        <a href="/content/syllables/h" style="font-size:150%">H</a>
+        <a href="/content/syllables/i" style="font-size:150%">I</a>
+        <a href="/content/syllables/j" style="font-size:150%">J</a>
+        <a href="/content/syllables/k" style="font-size:150%">K</a>
+        <a href="/content/syllables/l" style="font-size:150%">L</a>
+        <a href="/content/syllables/m" style="font-size:150%">M</a>
+        <a href="/content/syllables/n" style="font-size:150%">N</a>
+        <a href="/content/syllables/o" style="font-size:150%">O</a>
+        <a href="/content/syllables/p" style="font-size:150%">P</a>
+        <a href="/content/syllables/q" style="font-size:150%">Q</a>
+        <a href="/content/syllables/r" style="font-size:150%">R</a>
+        <a href="/content/syllables/s" style="font-size:150%">S</a>
+        <a href="/content/syllables/t" style="font-size:150%">T</a>
+        <a href="/content/syllables/u" style="font-size:150%">U</a>
+        <a href="/content/syllables/v" style="font-size:150%">V</a>
+        <a href="/content/syllables/w" style="font-size:150%">W</a>
+        <a href="/content/syllables/x" style="font-size:150%">X</a>
+        <a href="/content/syllables/y" style="font-size:150%">Y</a>
+        <a href="/content/syllables/z" style="font-size:150%">Z</a>
     </div>
 </div>
 {% if letter %}
@@ -49,7 +49,13 @@
             <tr>
                 <td style="font-size:150%; color:DodgerBlue;">{{ syllables[key]['syllable'] }}</td>
                 <td style="text-align:center; font-size:150%;">{{ syllables[key]['transcription'] }}</td>
-                <td><i class="material-icons" style="color:MediumSeaGreen; font-size:45px;">play_circle_filled</i></td>
+                <td><button
+                        class="playButton material-icons"
+                        id={{ syllables[key]['syllable'] }}
+                        type="button"
+                        style="background-color: transparent; border: 0px; color:rgb(67, 160, 71); font-size:300%;">
+                        play_circle_filled</button>
+                </td>
                 <td style="font-size:100%;">{{ syllables[key]['description'] }}</td>
             </tr>
             {% endfor %}
@@ -58,5 +64,6 @@
 </div>
 <!-- --------------------------->
 {% endif %}
+<script src="{{ url_for('static', filename='js/voiceover_script.js') }}"></script>
 <br><br><br><br><br><br><br><br><br><br>
 {% endblock %}

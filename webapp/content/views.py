@@ -1,6 +1,8 @@
+import os
 from alphabet import ALPHABET
 from random import choice
 from syllables import SYLLABLES
+from gtts import gTTS
 
 from flask import (Blueprint, render_template, flash,
                    url_for, session, redirect)
@@ -15,7 +17,20 @@ blueprint = Blueprint('content', __name__, url_prefix='/content')
 def alphabet_page():
     alphabet_for_render_template = {f"{letter}_letter": ALPHABET[letter] for letter in 'abcdefghijklmnopqrstuvwxyz'}
     return render_template('alphabet.html', page_title='Алфавит',
-                           **alphabet_for_render_template)
+                           **alphabet_for_render_template,
+                           alphabet=ALPHABET)
+
+@blueprint.route('getvoiceover/<char>')
+def get_voiceover(char):
+    tts = gTTS(f"{char}", lang='en')
+    tts.save(f"webapp/static/sounds/{char}.mp3")
+    return f"/static/sounds/{char}.mp3"
+
+
+@blueprint.route('delete/<char>')
+def delete_file(char):
+    os.remove(f"webapp/static/sounds/{char}.mp3")
+    return f'{char} deleted'
 
 
 @blueprint.route('/syllables')
